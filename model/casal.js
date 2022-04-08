@@ -1,16 +1,16 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-productSchema = new Schema( {
+casalSchema = new Schema( {
 	name: String,
 	desc: String,
-	price: Number,
+	cargo: Number,
 	image: String,
-	discount: Number,
+	tel: Number,
 	user_id: Schema.ObjectId,
 	is_delete: { type: Boolean, default: false },
 	date : { type : Date, default: Date.now }
 }),
-product = mongoose.model('product', productSchema);
+casal = mongoose.model('casal', casalSchema);
 
-module.exports = product;
+module.exports = casal;

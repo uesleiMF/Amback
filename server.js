@@ -13,7 +13,7 @@ var multer = require('multer'),
   path = require('path');
   const Conn = require('./conn/conn');
 var fs = require('fs');
-var product = require("./model/product.js");
+var product = require("./model/casal.js");
 var user = require("./model/user.js");
 
 var dir = './uploads';
@@ -185,19 +185,19 @@ function checkUserAndGenerateToken(data, req, res) {
 }
 
 /* Api to add Product */
-app.post("/add-product", upload.any(), (req, res) => {
+app.post("/add-casal", upload.any(), (req, res) => {
   try {
-    if (req.files && req.body && req.body.name && req.body.desc && req.body.price &&
-      req.body.discount) {
+    if (req.files && req.body && req.body.name && req.body.desc && req.body.cargo &&
+      req.body.tel) {
 
-      let new_product = new product();
-      new_product.name = req.body.name;
-      new_product.desc = req.body.desc;
-      new_product.price = req.body.price;
-      new_product.image = req.files[0].filename;
-      new_product.discount = req.body.discount;
-      new_product.user_id = req.user.id;
-      new_product.save((err, data) => {
+      let new_casal = new casal();
+      new_casal.name = req.body.name;
+      new_casal.desc = req.body.desc;
+      new_casal.cargo = req.body.cargo;
+      new_casal.image = req.files[0].filename;
+      new_casal.tel = req.body.tel;
+      new_casal.user_id = req.user.id;
+      new_casal.save((err, data) => {
         if (err) {
           res.status(400).json({
             errorMessage: err,
@@ -206,7 +206,7 @@ app.post("/add-product", upload.any(), (req, res) => {
         } else {
           res.status(200).json({
             status: true,
-            title: 'Product Added successfully.'
+            title: 'Casal adicionado com sucesso.'
           });
         }
       });
@@ -226,36 +226,36 @@ app.post("/add-product", upload.any(), (req, res) => {
 });
 
 /* Api to update Product */
-app.post("/update-product", upload.any(), (req, res) => {
+app.post("/update-casal", upload.any(), (req, res) => {
   try {
-    if (req.files && req.body && req.body.name && req.body.desc && req.body.price &&
-      req.body.id && req.body.discount) {
+    if (req.files && req.body && req.body.name && req.body.desc && req.body.cargo &&
+      req.body.id && req.body.tel) {
 
-      product.findById(req.body.id, (err, new_product) => {
+      casal.findById(req.body.id, (err, new_casal) => {
 
         // if file already exist than remove it
-        if (req.files && req.files[0] && req.files[0].filename && new_product.image) {
-          var path = `./uploads/${new_product.image}`;
+        if (req.files && req.files[0] && req.files[0].filename && new_casal.image) {
+          var path = `./uploads/${new_casal.image}`;
           fs.unlinkSync(path);
         }
 
         if (req.files && req.files[0] && req.files[0].filename) {
-          new_product.image = req.files[0].filename;
+          new_casal.image = req.files[0].filename;
         }
         if (req.body.name) {
-          new_product.name = req.body.name;
+          new_casal.name = req.body.name;
         }
         if (req.body.desc) {
-          new_product.desc = req.body.desc;
+          new_casal.desc = req.body.desc;
         }
-        if (req.body.price) {
-          new_product.price = req.body.price;
+        if (req.body.cargo) {
+          new_casal.cargo = req.body.cargo;
         }
-        if (req.body.discount) {
-          new_product.discount = req.body.discount;
+        if (req.body.tel) {
+          new_casal.tel = req.body.tel;
         }
 
-        new_product.save((err, data) => {
+        new_casal.save((err, data) => {
           if (err) {
             res.status(400).json({
               errorMessage: err,
@@ -264,7 +264,7 @@ app.post("/update-product", upload.any(), (req, res) => {
           } else {
             res.status(200).json({
               status: true,
-              title: 'Product updated.'
+              title: 'Casal updated.'
             });
           }
         });
@@ -286,14 +286,14 @@ app.post("/update-product", upload.any(), (req, res) => {
 });
 
 /* Api to delete Product */
-app.post("/delete-product", (req, res) => {
+app.post("/delete-casal", (req, res) => {
   try {
     if (req.body && req.body.id) {
-      product.findByIdAndUpdate(req.body.id, { is_delete: true }, { new: true }, (err, data) => {
+      casal.findByIdAndUpdate(req.body.id, { is_delete: true }, { new: true }, (err, data) => {
         if (data.is_delete) {
           res.status(200).json({
             status: true,
-            title: 'Product deleted.'
+            title: 'Casal deleted.'
           });
         } else {
           res.status(400).json({
@@ -317,7 +317,7 @@ app.post("/delete-product", (req, res) => {
 });
 
 /*Api to get and search product with pagination and search by name*/
-app.get("/get-product", (req, res) => {
+app.get("/get-casal", (req, res) => {
   try {
     var query = {};
     query["$and"] = [];
@@ -332,24 +332,24 @@ app.get("/get-product", (req, res) => {
     }
     var perPage = 5;
     var page = req.query.page || 1;
-    product.find(query, { date: 1, name: 1, id: 1, desc: 1, price: 1, discount: 1, image: 1 })
+    casal.find(query, { date: 1, name: 1, id: 1, desc: 1, cargo: 1, tel: 1, image: 1 })
       .skip((perPage * page) - perPage).limit(perPage)
       .then((data) => {
-        product.find(query).count()
+        casal.find(query).count()
           .then((count) => {
 
             if (data && data.length > 0) {
               res.status(200).json({
                 status: true,
-                title: 'Product retrived.',
-                products: data,
+                title: 'Casal retrived.',
+                casais: data,
                 current_page: page,
                 total: count,
                 pages: Math.ceil(count / perPage),
               });
             } else {
               res.status(400).json({
-                errorMessage: 'There is no product!',
+                errorMessage: 'There is no casal!',
                 status: false
               });
             }
