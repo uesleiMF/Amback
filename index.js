@@ -1,30 +1,23 @@
-if(process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-  }
-  // importar o express para criar o nosso servidor http (web)
-  const express = require('express');
-  // importar o cors para impedir problema de recursos distintos (urls externas acessando o nosso backend)
-  const cors  = require('cors');
-  // importar as nossas rotas da musicaconst ProdutosRouter = require('./routes/produtos.routes');
-  // importar a minha funcao de conexao com o banco
-  const Conn = require('./conn/conn');
-  
-  // inicializar o express e atribuir em uma constante
-  const app = express();
-  
-  // chamo um midleware(faz a ponte entre a entrada e saida do backend)
-  // para falar pro express trabalhar com o formato JSON
-  app.use(express.json());
-  // chamo outro middleware para interceptar as chamadas e garantir que cors esta correto
-  app.use(cors());
-  
+require("dotenv").config();
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const Conn = require('./conn/conn');
+
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 
+// database connection
 
 
+// middlewares
+app.use(express.json());
+app.use(cors());
 
-// buscando os dados da variavel de ambiente
+// routes
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+
 const db_url = process.env.DB_URL;
 const db_user = process.env.DB_USER;
 const db_pass = process.env.DB_PASS;
@@ -36,4 +29,3 @@ const port = 3001;
 app.listen(process.env.PORT || port, () => {
   console.log(`O servidor esta rodando na porta ${port}`);
 })
-
