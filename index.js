@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-app.use("/api/users", userRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/auth", authRoutes);
 
 const db_url = process.env.DB_URL;
 const db_user = process.env.DB_USER;
