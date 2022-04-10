@@ -1,4 +1,6 @@
-require("dotenv").config();
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -15,8 +17,8 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-app.use("/users", userRoutes);
-app.use("/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 
 const db_url = process.env.DB_URL;
 const db_user = process.env.DB_USER;
