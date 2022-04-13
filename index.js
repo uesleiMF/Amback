@@ -7,6 +7,7 @@ const cors = require("cors");
 const Conn = require("./conn/conn");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const ProdutosRouter = require('./routes/produtos.routes');
 
 // database connection
 
@@ -18,6 +19,7 @@ app.use(cors());
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use('/produtos', ProdutosRouter);
 
 const db_url = process.env.DB_URL;
 const db_user = process.env.DB_USER;
