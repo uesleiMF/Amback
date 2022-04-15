@@ -18,28 +18,11 @@ const produtoSchema = new mongoose.Schema({
   prazo: {type: String },
   dataCriacao: { type: Date, default: Date.now }
 })
+
 // criar e inicializando meu model baseado no meu schema
-const User = mongoose.model('produtos', produtoSchema);
+const ProdutoModel = mongoose.model('produtos', produtoSchema);
 
-const validate = (data) => {
-	const schema = Joi.object({
-    titulo: Joi.string().titulo().required().label("Titulo"),
-		descricao: Joi.string().descricao().required().label("Descricao"),
-		prioridade: Joi.string().prioridade().required().label("Prioridade"),
-    status: Joi.string().status().required().label("Status"),
-    capa: Joi.string().capa().required().label("capa"),
-    prazo: Joi.string().prazo().required().label("Prazo"),
-    dataCriacao: Joi.string().dataCriacao().required().label("dataCriação"),
-	});
-	return schema.validate(data);
-};
-
-module.exports = { User, validate };
-
-
-
-
-
+module.exports = ProdutoModel;
 
 
 
