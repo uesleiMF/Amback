@@ -32,7 +32,7 @@ class ProdutosController {
     }
     await produtosService.create(produto)
     .then(() => {
-      res.send({message: `Produto ${produto.titulo} Cadastrado com sucesso`})
+      res.send({message: `Casal ${produto.titulo} Cadastrado com sucesso`})
     })
     .catch((err) => {
       console.error(err);
@@ -47,7 +47,7 @@ class ProdutosController {
     const produtoEdit = req.body;
     await produtosService.edit(idParam, produtoEdit)
     .then(() => {
-      res.send({message: `Produto Editado com sucesso`})
+      res.send({message: `Casal Editado com sucesso`})
     })
     .catch( err => { 
       res.status(500).send({message: `Erro: ${err}`})
@@ -59,7 +59,7 @@ class ProdutosController {
     const idParam = req.params.id;
     await produtosService.delete(idParam)
     .then(() => {
-      res.send({message: 'Produto excluido com sucesso'})
+      res.send({message: 'Casal excluido com sucesso'})
     })
     .catch(err => {
       res.status(500).send({error: `Error: ${err}`});
