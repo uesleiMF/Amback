@@ -1,6 +1,7 @@
 // vamos construir a estrutura de dados  e vincular ela com o mongoDB
 // importar o mongoose
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 // Schemas -> É a estrutura de dados de um documento(linha da tabela).
 // Documents -> sao os nossos dados da nossa collection (linha da tabela)
@@ -16,7 +17,10 @@ const produtoSchema = new mongoose.Schema({
   status: {type: String, required: true},
   capa: {type: String },
   prazo: {type: String },
-  dataCriacao: { type: Date, default: Date.now }
+  dataCriacao: { type: Date, default: Date.now },
+  user_id: Schema.ObjectId,
+	is_delete: { type: Boolean, default: false }
+
 })
 
 // criar e inicializando meu model baseado no meu schema
