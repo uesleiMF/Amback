@@ -4,10 +4,10 @@ if(process.env.NODE_ENV !== 'production') {
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const Conn = require("./conn/conn");
+const conn = require("./conn/conn");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
-const ProdutosRoutes = require('./routes/produtos.routes');
+const produtosRoutes = require('./routes/produtos');
 
 
 
@@ -19,7 +19,7 @@ app.use(cors());
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/produtos", ProdutosRoutes);
+app.use("/api/produtos", produtosRoutes);
 
 
 //ssssssssssss
