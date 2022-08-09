@@ -2,7 +2,7 @@
 // para poder acessar a sua funcao de conexao com o banco de dados.
 const mongoose = require('mongoose');
 
-const Conn = (url, user, pass, data) => {
+const conn = (url, user, pass, data) => {
   // criar uma conexao com o banco de dados.
   // url de conexao = mongodb://servidor:porta/nomedobanco
   // useNewUrlParser = fala pro mongo usar o novo sistema de urls
@@ -20,4 +20,4 @@ const Conn = (url, user, pass, data) => {
   })
 }
 
-module.exports = Conn;
+module.exports = conn;

@@ -3,9 +3,17 @@ if(process.env.NODE_ENV !== 'production') {
 }
 const express = require("express");
 const app = express();
+<<<<<<< HEAD
 const Conn = require("./conn/conn");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
+=======
+const cors = require("cors");
+const conn = require("./conn/conn");
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+const produtosRoutes = require('./routes/produtos');
+>>>>>>> a9b7a42a9a9bacf58d1eaa50e4a6b8a91d47c285
 
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
@@ -56,6 +64,10 @@ app.use(cors());
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+<<<<<<< HEAD
+=======
+app.use("/api/produtos", produtosRoutes);
+>>>>>>> a9b7a42a9a9bacf58d1eaa50e4a6b8a91d47c285
 
 /* Api to add Product */
 app.post("/add-product", upload.any(), (req, res) => {
@@ -252,7 +264,7 @@ const db_user = process.env.DB_USER;
 const db_pass = process.env.DB_PASS;
 const db_data = process.env.DB_DATA;
 
-Conn(db_url, db_user, db_pass, db_data);
+conn(db_url, db_user, db_pass, db_data);
 
 // inicializar o servidor http em alguma porta para podermos acessar ele.
 const port = 3001;
