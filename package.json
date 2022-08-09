@@ -25,8 +25,12 @@
     "imdb-api": "^4.4.1",
    
     "jwt-decode": "^3.1.2",
-  
+    "@mapbox/node-pre-gyp": "^1.0.9",
+   
+    "mapbox": "^1.0.0-beta10",
+    
     "multer": "^1.4.2"
+    
 
   },
 
