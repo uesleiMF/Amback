@@ -60,7 +60,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 
 
-
 /* Api to add Product */
 app.post("/add-product", upload.any(), (req, res) => {
   try {
