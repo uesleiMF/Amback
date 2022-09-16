@@ -11,31 +11,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.9",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "imdb-api": "^4.4.1",
     "joi": "^17.5.0",
     "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.1.2",
-    "nodemailer": "^6.7.2",
-    "nodemon": "^2.0.15",
-   
-    "imdb-api": "^4.4.1",
-   
     "jwt-decode": "^3.1.2",
-    "@mapbox/node-pre-gyp": "^1.0.9",
-   
     "mapbox": "^1.0.0-beta10",
-    
-    "multer": "^1.4.2"
-    
-
+    "mongoose": "^6.1.2",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.7.2",
+    "nodemon": "^2.0.15"
   },
-
-
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/uesleiMF/Amback.git"
